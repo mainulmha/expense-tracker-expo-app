@@ -1,0 +1,30 @@
+## React Native-এর সব কোর কম্পোনেন্টের একটি সম্পূর্ণ লিস্ট দিচ্ছি।
+
+### React Native কোর কম্পোনেন্ট লিস্ট (প্রিন্টেবল চিটশিট)
+
+| কম্পোনেন্ট নাম           | কী এটি                 | কী করে                                   | কেন ব্যবহার করা হয়                  | উদাহরণ কোড                                                                                                |
+| ------------------------ | ---------------------- | ---------------------------------------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| View                     | কন্টেইনার কম্পোনেন্ট   | অন্য কম্পোনেন্ট গ্রুপ করে লেআউট তৈরি করে | UI স্ট্রাকচার তৈরি করতে             | `<View style={{flex: 1}}><Text>Hello</Text></View>`                                                       |
+| Text                     | টেক্সট ডিসপ্লে         | টেক্সট দেখায়                             | লেখা বা লেবেল দেখাতে                | `<Text>Hello World</Text>`                                                                                |
+| Image                    | ইমেজ ডিসপ্লে           | ছবি লোড করে দেখায়                        | ভিজুয়াল কনটেন্ট যোগ করতে            | `<Image source={{uri: 'url'}} style={{width: 100, height: 100}} />`                                       |
+| TextInput                | ইনপুট ফিল্ড            | ইউজার ইনপুট নেয়                          | ফর্ম তৈরি করতে                      | `<TextInput placeholder="Enter text" />`                                                                  |
+| ScrollView               | স্ক্রলেবল কন্টেইনার    | কনটেন্ট স্ক্রল করে                       | লম্বা কনটেন্ট দেখাতে                | `<ScrollView><Text>Long text...</Text></ScrollView>`                                                      |
+| FlatList                 | লিস্ট রেন্ডারার        | ডেটা লিস্ট রেন্ডার করে                   | বড় লিস্ট দেখাতে (পারফরম্যান্স ভালো) | `<FlatList data={data} renderItem={({item}) => <Text>{item}</Text>} />`                                   |
+| SectionList              | সেকশন লিস্ট            | লিস্টকে সেকশনে ভাগ করে                   | গ্রুপড ডেটা দেখাতে                  | `<SectionList sections={sections} renderItem={({item}) => <Text>{item}</Text>} />`                        |
+| TouchableOpacity         | টাচেবল বাটন            | টাচে অপাসিটি চেঞ্জ হয়                    | ইন্টারেক্টিভ বাটন তৈরি করতে         | `<TouchableOpacity onPress={() => alert('Pressed')}><Text>Press</Text></TouchableOpacity>`                |
+| TouchableHighlight       | টাচেবল হাইলাইট         | টাচে ব্যাকগ্রাউন্ড হাইলাইট হয়            | বাটন তৈরি করতে                      | `<TouchableHighlight onPress={() => {}}><Text>Highlight</Text></TouchableHighlight>`                      |
+| TouchableWithoutFeedback | টাচেবল (নো ফিডব্যাক)   | টাচ ইভেন্ট হ্যান্ডেল করে                 | সিম্পল টাচ তৈরি করতে                | `<TouchableWithoutFeedback onPress={() => {}}><View><Text>Touch</Text></View></TouchableWithoutFeedback>` |
+| Pressable                | আধুনিক টাচেবল          | প্রেস স্টেট ম্যানেজ করে                  | বাটন তৈরি করতে (উন্নত)              | `<Pressable onPress={() => {}}><Text>Pressable</Text></Pressable>`                                        |
+| Button                   | সিম্পল বাটন            | বেসিক বাটন                               | কুইক অ্যাকশন তৈরি করতে              | `<Button title="Click" onPress={() => {}} />`                                                             |
+| Switch                   | টগল সুইচ               | অন/অফ টগল করে                            | সেটিংস চেঞ্জ করতে                   | `<Switch value={true} onValueChange={() => {}} />`                                                        |
+| Modal                    | মডাল ডায়ালগ            | ওভারলে স্ক্রিন দেখায়                     | পপআপ তৈরি করতে                      | `<Modal visible={true}><Text>Modal</Text></Modal>`                                                        |
+| ActivityIndicator        | লোডিং ইন্ডিকেটর        | স্পিনিং অ্যানিমেশন                       | লোডিং দেখাতে                        | `<ActivityIndicator size="large" />`                                                                      |
+| Alert                    | অ্যালার্ট ডায়ালগ       | পপআপ মেসেজ                               | নোটিফিকেশন তৈরি করতে                | `Alert.alert('Title', 'Message')`                                                                         |
+| Animated                 | অ্যানিমেশন API         | কম্পোনেন্ট অ্যানিমেট করে                 | অ্যানিমেশন যোগ করতে                 | `Animated.timing(opacity, {toValue: 1}).start()`                                                          |
+| Dimensions               | ডাইমেনশন API           | স্ক্রিন সাইজ পায়                         | রেসপন্সিভ লেআউট তৈরি করতে           | `const {width, height} = Dimensions.get('window')`                                                        |
+| KeyboardAvoidingView     | কীবোর্ড অ্যাভয়েডার     | কীবোর্ড এড়িয়ে লেআউট করে                  | ইনপুট সেফ রাখতে                     | `<KeyboardAvoidingView behavior="padding"><TextInput /></KeyboardAvoidingView>`                           |
+| SafeAreaView             | সেফ এরিয়া কন্টেইনার    | নচ এড়িয়ে লেআউট করে                       | মডার্ন ডিভাইসে কনটেন্ট সেফ রাখতে    | `<SafeAreaView><Text>Safe</Text></SafeAreaView>`                                                          |
+| StatusBar                | স্ট্যাটাস বার কন্ট্রোল | স্ট্যাটাস বার স্টাইল চেঞ্জ করে           | থিম ম্যাচ করতে                      | `<StatusBar style="dark-content" />`                                                                      |
+| RefreshControl           | রিফ্রেশ কন্ট্রোল       | পুল-টু-রিফ্রেশ যোগ করে                   | লিস্ট রিফ্রেশ করতে                  | `<ScrollView refreshControl={<RefreshControl refreshing={false} onRefresh={() => {}} />} />`              |
+
+এটি React Native-এর মূল কম্পোনেন্ট কভার করে। যদি আরও ডিটেলস বা অন্য কিছু (যেমন হুক বা API) চান, বলুন! Expo Docs বা React Native Docs দেখে প্র্যাকটিস করুন।

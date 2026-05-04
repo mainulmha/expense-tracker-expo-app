@@ -1,24 +1,58 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+import { MyCustomHeader } from "@/components/MyCustomHeader";
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container} edges={["top"]}>
+        <StatusBar style="dark" />
+        <Stack
+          screenOptions={{
+            headerShown: true,
+          }}
+        >
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="settings"
+            options={{
+              header: () => <MyCustomHeader title="Settings" />,
+              headerShown: true,
+            }}
+          />
+          <Stack.Screen
+            name="change-password"
+            options={{
+              header: () => <MyCustomHeader title="Change Password" />,
+              headerShown: true,
+            }}
+          />
+          <Stack.Screen
+            name="edit-profile"
+            options={{
+              header: () => <MyCustomHeader title="Edit Profile" />,
+              headerShown: true,
+            }}
+          />
+          <Stack.Screen
+            name="notifications"
+            options={{
+              header: () => <MyCustomHeader title="Notifications" />,
+              headerShown: true,
+            }}
+          />
+        </Stack>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "gray",
+  },
+});

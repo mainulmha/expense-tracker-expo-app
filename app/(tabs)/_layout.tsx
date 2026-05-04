@@ -1,35 +1,85 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import {
+  HeaderLeftBack,
+  HeaderLeftMenu,
+  HeaderRight,
+} from "@/components/HeaderButtons";
+import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+        tabBarActiveTintColor: "#50eb25",
+        tabBarInactiveTintColor: "#9e9fa0",
+        tabBarStyle: {
+          height: 85,
+          paddingBottom: 12,
+          paddingTop: 8,
+        },
+        headerStatusBarHeight: 0,
+        headerShown: true,
+        headerTitleAlign: "center",
+        headerStyle: {
+          height: 70,
+          backgroundColor: "#fff",
+          elevation: 2,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 1 },
+          shadowOpacity: 0.1,
+        },
+        headerTitleStyle: {
+          fontSize: 18,
+          fontWeight: "bold",
+          color: "#0F172A",
+        },
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="dashboard"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Dashboard",
+          headerTitle: "Expense Tracker",
+          headerLeft: () => <HeaderLeftMenu />,
+          headerRight: () => <HeaderRight />,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="grid-outline" size={size} color={color} />
+          ),
         }}
       />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
+
+      {["expense", "add", "reports", "profile"].map((name) => (
+        <Tabs.Screen
+          key={name}
+          name={name}
+          options={{
+            title: name.charAt(0).toUpperCase() + name.slice(1),
+            headerTitle:
+              name === "add"
+                ? "Add Expense"
+                : name === "expense"
+                  ? "Charts"
+                  : undefined,
+            headerLeft: () => <HeaderLeftBack />,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons
+                name={
+                  name === "expense"
+                    ? "wallet-outline"
+                    : name === "add"
+                      ? "add-circle-outline"
+                      : name === "reports"
+                        ? "bar-chart-outline"
+                        : "person-circle-outline"
+                }
+                size={size}
+                color={color}
+              />
+            ),
+            headerRight: () => <HeaderRight />,
+          }}
+        />
+      ))}
     </Tabs>
   );
 }
