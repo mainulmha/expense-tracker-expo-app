@@ -58,7 +58,7 @@ export default function TabsLayout() {
               name === "add"
                 ? "Add Expense"
                 : name === "expense"
-                  ? "Charts"
+                  ? "Chart"
                   : undefined,
             headerLeft: () => <HeaderLeftBack />,
             tabBarIcon: ({ color, size }) => (

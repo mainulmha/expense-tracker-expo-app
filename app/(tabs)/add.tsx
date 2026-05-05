@@ -69,10 +69,8 @@ export default function AddScreen() {
   };
 
   return (
-    // মূল কন্টেন্টকে SafeAreaView দিয়ে র‍্যাপ করা হলো
-
     <View style={styles.container}>
-      <Text style={styles.title}>Add Expense</Text>
+      {/* <Text style={styles.title}>Add Expense</Text> */}
 
       <View style={styles.form}>
         {/* Amount Input */}
@@ -203,9 +201,10 @@ export default function AddScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 24,
-    paddingBottom: 24,
-    backgroundColor: "#fff",
+    paddingHorizontal: 12,
+    paddingBottom: 12,
+    // backgroundColor: "#fff",
+    backgroundColor: "#F8FAFC",
     justifyContent: "center",
   },
   title: {
@@ -218,6 +217,9 @@ const styles = StyleSheet.create({
   form: {
     width: "100%",
     gap: 12,
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 16,
   },
   label: {
     fontSize: 14,
