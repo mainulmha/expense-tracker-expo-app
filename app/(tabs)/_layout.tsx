@@ -48,7 +48,7 @@ export default function TabsLayout() {
         }}
       />
 
-      {["expense", "add", "reports", "profile"].map((name) => (
+      {["charts", "add", "reports", "profile"].map((name) => (
         <Tabs.Screen
           key={name}
           name={name}
@@ -57,14 +57,14 @@ export default function TabsLayout() {
             headerTitle:
               name === "add"
                 ? "Add Expense"
-                : name === "expense"
+                : name === "charts"
                   ? "Chart"
                   : undefined,
             headerLeft: () => <HeaderLeftBack />,
             tabBarIcon: ({ color, size }) => (
               <Ionicons
                 name={
-                  name === "expense"
+                  name === "charts"
                     ? "wallet-outline"
                     : name === "add"
                       ? "add-circle-outline"
