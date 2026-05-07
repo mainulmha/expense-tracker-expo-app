@@ -48,7 +48,7 @@ export default function TabsLayout() {
         }}
       />
 
-      {["charts", "add", "reports", "profile"].map((name) => (
+      {["charts", "add", "reports", "profile",].map((name) => (
         <Tabs.Screen
           key={name}
           name={name}

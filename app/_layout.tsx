@@ -17,13 +17,6 @@ export default function RootLayout() {
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen
-            name="settings"
-            options={{
-              header: () => <MyCustomHeader title="Settings" />,
-              headerShown: true,
-            }}
-          />
-          <Stack.Screen
             name="change-password"
             options={{
               header: () => <MyCustomHeader title="Change Password" />,
@@ -44,6 +37,13 @@ export default function RootLayout() {
               headerShown: true,
             }}
           />
+          <Stack.Screen
+            name="category"
+            options={{
+              header: () => <MyCustomHeader title="Category" />,
+              headerShown: true,
+            }}
+          />
         </Stack>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -53,6 +53,6 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "gray",
+    backgroundColor: "#fff", // gray বদলে সাদা দিন
   },
 });

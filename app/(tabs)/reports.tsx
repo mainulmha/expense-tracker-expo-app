@@ -3,6 +3,7 @@ import TransactionItem from "@/components/TransactionItem";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -42,74 +43,76 @@ export default function ReportsScreen() {
   const [toDate, setToDate] = useState("");
 
   return (
-    <View style={styles.container}>
-      {/* FILTER CARD */}
-      <View style={styles.filterCard}>
-        {/* Date Filter */}
-        <View style={styles.row}>
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>From Date</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="YYYY-MM-DD"
-              value={fromDate}
-              onChangeText={setFromDate}
-            />
+    <ScrollView style={styles.container}>
+      <View style={styles.container}>
+        {/* FILTER CARD */}
+        <View style={styles.filterCard}>
+          {/* Date Filter */}
+          <View style={styles.row}>
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>From Date</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="YYYY-MM-DD"
+                value={fromDate}
+                onChangeText={setFromDate}
+              />
+            </View>
+
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>To Date</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="YYYY-MM-DD"
+                value={toDate}
+                onChangeText={setToDate}
+              />
+            </View>
           </View>
 
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>To Date</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="YYYY-MM-DD"
-              value={toDate}
-              onChangeText={setToDate}
-            />
+          {/* Category + Type */}
+          <View style={styles.row}>
+            <View style={styles.dropdown}>
+              <Text>Category</Text>
+            </View>
+
+            <View style={styles.dropdown}>
+              <Text>Type</Text>
+            </View>
+          </View>
+
+          {/* Buttons */}
+          <View style={styles.buttonRow}>
+            <TouchableOpacity style={[styles.btn, styles.btnSearch]}>
+              <Ionicons name="search" size={18} color="#fff" />
+              <Text style={styles.btnText}>Search</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[styles.btn, styles.btnReset]}>
+              <Text style={[styles.btnText, { color: "#64748B" }]}>Reset</Text>
+            </TouchableOpacity>
           </View>
         </View>
 
-        {/* Category + Type */}
-        <View style={styles.row}>
-          <View style={styles.dropdown}>
-            <Text>Category</Text>
-          </View>
-
-          <View style={styles.dropdown}>
-            <Text>Type</Text>
-          </View>
-        </View>
-
-        {/* Buttons */}
-        <View style={styles.buttonRow}>
-          <TouchableOpacity style={[styles.btn, styles.btnSearch]}>
-            <Ionicons name="search" size={18} color="#fff" />
-            <Text style={styles.btnText}>Search</Text>
+        {/* EXPORT SECTION */}
+        <View style={styles.exportRow}>
+          <TouchableOpacity style={styles.exportBtn}>
+            <Ionicons name="document-text" size={18} color="#EA4335" />
+            <Text style={styles.exportText}>PDF</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.btn, styles.btnReset]}>
-            <Text style={[styles.btnText, { color: "#64748B" }]}>Reset</Text>
+          <TouchableOpacity style={styles.exportBtn}>
+            <Ionicons name="stats-chart" size={18} color="#34A853" />
+            <Text style={styles.exportText}>Excel</Text>
           </TouchableOpacity>
         </View>
+
+        {/* TRANSACTIONS */}
+        {transactions.map((item) => (
+          <TransactionItem key={item.id} item={item} />
+        ))}
       </View>
-
-      {/* EXPORT SECTION */}
-      <View style={styles.exportRow}>
-        <TouchableOpacity style={styles.exportBtn}>
-          <Ionicons name="document-text" size={18} color="#EA4335" />
-          <Text style={styles.exportText}>PDF</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.exportBtn}>
-          <Ionicons name="stats-chart" size={18} color="#34A853" />
-          <Text style={styles.exportText}>Excel</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* TRANSACTIONS */}
-      {transactions.map((item) => (
-        <TransactionItem key={item.id} item={item} />
-      ))}
-    </View>
+    </ScrollView>
   );
 }
 

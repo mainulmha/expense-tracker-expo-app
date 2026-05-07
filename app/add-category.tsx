@@ -1,8 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  FlatList,
-  Modal,
   ScrollView,
   StyleSheet,
   Text,
@@ -153,8 +151,7 @@ const INITIAL_CATEGORIES = [
     type: "expense",
   },
 ];
-
-export default function Category() {
+export function AddCategoryScreen() {
   const [categories, setCategories] = useState(INITIAL_CATEGORIES);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -204,130 +201,86 @@ export default function Category() {
   };
 
   return (
-    <View style={styles.container}>
-      {/* হেডার এবং লিস্ট আগের মতোই থাকবে... */}
-      <View style={styles.header}>
-        <Text style={styles.title}>All Categories</Text>
+    <View>
+      <Text style={styles.title}>New Category</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Category Name (e.g. Health)"
+        value={newName}
+        onChangeText={setNewName}
+      />
+
+      {/* আইকন সিলেকশন গ্রিড */}
+      <Text style={styles.title}>Select Icon</Text>
+      <View style={{ height: 250 }}>
+        {" "}
+        {/* একটি নির্দিষ্ট হাইট দিন */}
+        <ScrollView contentContainerStyle={styles.iconGrid}>
+          {AVAILABLE_ICONS.map((icon) => (
+            <TouchableOpacity
+              key={icon}
+              style={[
+                styles.iconItem,
+                selectedIcon === icon && styles.selectedIconItem,
+              ]}
+              onPress={() => setSelectedIcon(icon)}
+            >
+              <Ionicons
+                name={icon as any}
+                size={24}
+                color={selectedIcon === icon ? "#3B82F6" : "#64748B"}
+              />
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </View>
+
+      {/* Type Switch (Income/Expense) */}
+      <View style={styles.typeContainer}>
         <TouchableOpacity
-          style={styles.addButton}
-          onPress={() => setModalVisible(true)}
+          style={[
+            styles.typeBtn,
+            selectedType === "expense" && styles.activeExpense,
+          ]}
+          onPress={() => setSelectedType("expense")}
         >
-          <Ionicons name="add" size={24} color="#fff" />
+          <Text
+            style={
+              selectedType === "expense" ? styles.activeText : styles.typeText
+            }
+          >
+            Expense
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.typeBtn,
+            selectedType === "income" && styles.activeIncome,
+          ]}
+          onPress={() => setSelectedType("income")}
+        >
+          <Text
+            style={
+              selectedType === "income" ? styles.activeText : styles.typeText
+            }
+          >
+            Income
+          </Text>
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        data={categories}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.categoryCard}>
-            <View
-              style={[
-                styles.iconContainer,
-                { backgroundColor: item.color + "20" },
-              ]}
-            >
-              <Ionicons name={item.icon as any} size={24} color={item.color} />
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={styles.categoryName}>{item.name}</Text>
-              <Text style={styles.categoryType}>{item.type.toUpperCase()}</Text>
-            </View>
-          </View>
-        )}
-        contentContainerStyle={styles.listContent}
-      />
-
-      {/* --- ADD CATEGORY MODAL --- */}
-      <Modal visible={modalVisible} animationType="slide" transparent={true}>
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalTitle}>New Category</Text>
-
-            <TextInput
-              style={styles.input}
-              placeholder="Category Name (e.g. Health)"
-              value={newName}
-              onChangeText={setNewName}
-            />
-
-            {/* আইকন সিলেকশন গ্রিড */}
-            <Text style={styles.subTitle}>Select Icon</Text>
-            <View style={{ height: 250 }}>
-              {" "}
-              {/* একটি নির্দিষ্ট হাইট দিন */}
-              <ScrollView contentContainerStyle={styles.iconGrid}>
-                {AVAILABLE_ICONS.map((icon) => (
-                  <TouchableOpacity
-                    key={icon}
-                    style={[
-                      styles.iconItem,
-                      selectedIcon === icon && styles.selectedIconItem,
-                    ]}
-                    onPress={() => setSelectedIcon(icon)}
-                  >
-                    <Ionicons
-                      name={icon as any}
-                      size={24}
-                      color={selectedIcon === icon ? "#3B82F6" : "#64748B"}
-                    />
-                  </TouchableOpacity>
-                ))}
-              </ScrollView>
-            </View>
-
-            {/* Type Switch (Income/Expense) */}
-            <View style={styles.typeContainer}>
-              <TouchableOpacity
-                style={[
-                  styles.typeBtn,
-                  selectedType === "expense" && styles.activeExpense,
-                ]}
-                onPress={() => setSelectedType("expense")}
-              >
-                <Text
-                  style={
-                    selectedType === "expense"
-                      ? styles.activeText
-                      : styles.typeText
-                  }
-                >
-                  Expense
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.typeBtn,
-                  selectedType === "income" && styles.activeIncome,
-                ]}
-                onPress={() => setSelectedType("income")}
-              >
-                <Text
-                  style={
-                    selectedType === "income"
-                      ? styles.activeText
-                      : styles.typeText
-                  }
-                >
-                  Income
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.modalActions}>
-              <TouchableOpacity
-                onPress={() => setModalVisible(false)}
-                style={styles.cancelBtn}
-              >
-                <Text style={{ color: "#64748B" }}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.saveBtn} onPress={addCategory}>
-                <Text style={{ color: "#fff", fontWeight: "bold" }}>Save</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      <View style={styles.modalActions}>
+        <TouchableOpacity
+          onPress={() => setModalVisible(false)}
+          style={styles.cancelBtn}
+        >
+          <Text style={{ color: "#64748B" }}>Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.saveBtn} onPress={addCategory}>
+          <Text style={{ color: "#fff", fontWeight: "bold" }}>Save</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

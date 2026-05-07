@@ -2,7 +2,7 @@ import { Transaction } from "@/app/types/transaction";
 import DropdownComponent from "@/components/DropdownComponent";
 import CustomPieChart from "@/components/PieChart";
 import TransactionItem from "@/components/TransactionItem";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function ChartScreen() {
   const transactions: Transaction[] = [
@@ -81,23 +81,25 @@ export default function ChartScreen() {
   ];
 
   return (
-    <View>
-      <View style={{ paddingTop: 10, paddingLeft: 10, paddingRight: 10 }}>
-        <DropdownComponent />
+    <ScrollView>
+      <View>
+        <View style={{ paddingTop: 10, paddingLeft: 10, paddingRight: 10 }}>
+          <DropdownComponent />
+        </View>
+        <View style={{ paddingLeft: 10, paddingRight: 10 }}>
+          <CustomPieChart />
+        </View>
+        {/* Transactions */}
+        <View style={styles.cardBox}>
+          <Text style={styles.txTitle}>Recent Transactions</Text>
+          {transactions.map((item) => (
+            <>
+              <TransactionItem key={item.id} item={item} />
+            </>
+          ))}
+        </View>
       </View>
-      <View style={{ paddingLeft: 10, paddingRight: 10 }}>
-        <CustomPieChart />
-      </View>
-      {/* Transactions */}
-      <View style={styles.cardBox}>
-        <Text style={styles.txTitle}>Recent Transactions</Text>
-        {transactions.map((item) => (
-          <>
-            <TransactionItem key={item.id} item={item} />
-          </>
-        ))}
-      </View>
-    </View>
+    </ScrollView>
   );
 }
 

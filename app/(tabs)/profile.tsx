@@ -52,7 +52,11 @@ export default function ProfileScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Wallet</Text>
           <Row icon="wallet-outline" label="My Wallets" />
-          <Row icon="grid-outline" label="Categories" />
+          <Row
+            onPress={() => router.push("/cateogry")}
+            icon="grid-outline"
+            label="Categories"
+          />
           <Row icon="pricetags-outline" label="Labels" />
           <Row icon="cash-outline" label="Main Currency" />
         </View>
